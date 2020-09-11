@@ -1,3 +1,5 @@
+package ForagerModGui;
+
 import java.util.HashMap;
 
 public class Item {

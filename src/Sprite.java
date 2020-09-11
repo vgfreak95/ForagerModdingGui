@@ -1,3 +1,4 @@
+package ForagerModGui;
 
 public class Sprite {
     

@@ -1,3 +1,5 @@
+package ForagerModGui;
+
 import java.awt.BorderLayout;
 
 import java.awt.EventQueue;
@@ -44,11 +46,12 @@ public class Gui extends JFrame implements ActionListener {
 	ArrayList<String> panelArrayList = new ArrayList<String>();
 	
 	private JButton buttonContinue;
+	private JButton buttonBack;
 	
 	public enum panels {
 		
-		SPRITECREATE,//("panelSpriteCreate"),
-		ITEMCREATE,//("panelItemCreate")
+		panelSpriteCreate,
+		panelItemCreate,
 
 	}
 
@@ -91,7 +94,7 @@ public class Gui extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("G:\\Users\\VGFreak\\eclipse-workspace\\ForagerGui\\bin\\ForagerIconGui.png"));
+		lblNewLabel.setIcon(new ImageIcon(getClass().getResource("ForagerIconGui.png")));
 		panelTop.add(lblNewLabel);
 		
 		Color textForegroundColor = new Color(169, 169, 169);
@@ -111,6 +114,15 @@ public class Gui extends JFrame implements ActionListener {
 		buttonContinue.setBackground(new Color(210, 105, 30));
 		panelBottom.add(buttonContinue);
 		
+		buttonBack = new JButton("BACK");
+		buttonBack.addActionListener(this);
+		buttonBack.setBounds(20, 16, 148, 51);
+		buttonBack.setForeground(new Color(245, 245, 245));
+		buttonBack.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+		buttonBack.setBackground(new Color(210, 105, 30));
+		panelBottom.add(buttonBack);
+
+
 		panelSpriteCreate = new JPanel();
 		panelSpriteCreate.setBounds(0, 155, 630, 338);
 		panelSpriteCreate.setBackground(textBackgroundColor);
@@ -213,45 +225,76 @@ public class Gui extends JFrame implements ActionListener {
 		panelItemCreate.setLayout(null);
 		panelItemCreate.setBackground(new Color(60, 60, 60));
 		panelItemCreate.setBounds(0, 155, 630, 338);
-		panelItemCreate.setName("panelTest");
+		panelItemCreate.setName("panelItemCreate");
 		panelMain.add(panelItemCreate);
+
+		JLabel labelItemCreate = new JLabel("Item Create");
+		labelItemCreate.setBounds(30, 242, 154, 22);
+		labelItemCreate.setForeground(new Color(169, 169, 169));
+		labelItemCreate.setFont(new Font("Calibri", Font.BOLD, 17));
+		panelItemCreate.add(labelItemCreate);
 	}
 	
 	public void setCurrentPanel(String panelName) {
 		currentPanel = panelName;
+		if (currentPanel.equals("panelSpriteCreate")) {
+			buttonBack.setVisible(false);
+		}
+		else {
+			buttonBack.setVisible(true);
+		}
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonContinue) {
-			//panelController(currentPanel);
+			movePanelForward(currentPanel);
+			//System.out.println("Hello World");
 			
+		}
+
+		else if (e.getSource() == buttonBack) {
+			movePanelBack(currentPanel);
 		}
 			
 	}
 		
-	
-	public void panelController(String panelName) {
+	/**
+	 * Moves the panel forward a scene
+	 * @param panelName - the panel you want to check to switch
+	 */
+	public void movePanelForward(String panelName) {
 		
 		switch(panelName) {
 		
 			case "panelSpriteCreate":
-				System.out.println("Switching Panels");
+				System.out.println("Switching Panels to Items");
 				panelSpriteCreate.setVisible(false);
 				panelItemCreate.setVisible(true);
 				setCurrentPanel(panelItemCreate.getName());
 				break;
 				
 			case "panelItemCreate":
-				System.out.println("Switching Panels Back");
-				panelSpriteCreate.setVisible(true);
-				panelItemCreate.setVisible(false);
+				System.out.println("Switching Panels to Structures");
 				setCurrentPanel(panelSpriteCreate.getName());
 				break;
 				
 		}
-			
+	}
 
+	public void movePanelBack(String panelName) {
+		System.out.println(panelName);
+
+		switch(panelName) {
+
+			case "panelItemCreate":
+				System.out.println("Switching Panels Back to Sprites");
+				panelItemCreate.setVisible(false);
+				panelSpriteCreate.setVisible(true);
+				setCurrentPanel(panelSpriteCreate.getName());
+				break;
+				
+		}
 	}
 	
 	
