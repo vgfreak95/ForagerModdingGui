@@ -1,5 +1,7 @@
 package forager.gui;
 
+import forager.objects.*;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -16,6 +18,9 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JSpinner;
 import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.JToggleButton;
+import javax.swing.JComboBox;
 
 public class Gui extends JFrame {
 
@@ -28,6 +33,7 @@ public class Gui extends JFrame {
 	
 	
 	private PanelBottom panelBottom;
+	private JTextField txtDescription;
 
 
 	/**
@@ -55,6 +61,10 @@ public class Gui extends JFrame {
 	 */
 	public Gui() {
 		
+		
+		Sprite woodSprite = new Sprite("Wood", "location", 0, false, false, 8, 8);
+		woodSprite.getSpriteGMLCode(woodSprite);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 650);
 		contentPane = new JPanel();
@@ -68,8 +78,135 @@ public class Gui extends JFrame {
 		panelBottom = new PanelBottom();
 		contentPane.add(panelBottom.getPanelBottom());
 		
-		panelSpriteCreate = new PanelSpriteCreate();
-		contentPane.add(panelSpriteCreate.getPanelSpriteCreate());
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 153, 682, 359);
+		panel.setBackground(GuiColors.getColor(GuiColors.DARK_GRAY));
+		contentPane.add(panel);
+		panel.setLayout(null);
+
+		
+		JLabel lblItemName = new JLabel("Name of Item:");
+		lblItemName.setFont(new Font("Calibri", Font.BOLD, 18));
+		lblItemName.setBounds(25, 22, 118, 23);
+		lblItemName.setForeground(GuiColors.getColor(GuiColors.LIGHT_GRAY));
+		panel.add(lblItemName);
+		
+		JTextField txtItemName = new JTextField();
+		txtItemName.setFont(new Font("Calibri", Font.PLAIN, 18));
+		txtItemName.setText("item name");
+		txtItemName.setBounds(165, 16, 183, 38);
+		txtItemName.setSelectionColor(GuiColors.getColor(GuiColors.LIGHT_BLUE));
+		txtItemName.setForeground(new Color(169, 169, 169));
+		txtItemName.setFont(new Font("Calibri", Font.PLAIN, 17));
+		txtItemName.setColumns(10);
+		txtItemName.setCaretColor(GuiColors.getColor(GuiColors.LIGHT_BLUE));
+		txtItemName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, (GuiColors.getColor(GuiColors.LIGHT_BLUE))));
+		txtItemName.setBackground(new Color(60, 60, 60));
+		panel.add(txtItemName);
+		
+		JLabel lblDescription = new JLabel("Description:");
+		lblDescription.setForeground(new Color(169, 169, 169));
+		lblDescription.setFont(new Font("Calibri", Font.BOLD, 18));
+		lblDescription.setBounds(25, 64, 98, 23);
+		panel.add(lblDescription);
+		
+		txtDescription = new JTextField();
+		txtDescription.setText("description of item");
+		txtDescription.setSelectionColor(new Color(102, 183, 227));
+		txtDescription.setForeground(new Color(169, 169, 169));
+		txtDescription.setFont(new Font("Calibri", Font.PLAIN, 18));
+		txtDescription.setColumns(10);
+		txtDescription.setCaretColor(new Color(102, 183, 227));
+		txtDescription.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, (GuiColors.getColor(GuiColors.LIGHT_BLUE))));
+		txtDescription.setBackground(new Color(60, 60, 60));
+		txtDescription.setBounds(123, 58, 225, 38);
+		panel.add(txtDescription);
+		
+		JLabel lblValue = new JLabel("Value:");
+		lblValue.setToolTipText("How much the item sells for");
+		lblValue.setForeground(new Color(169, 169, 169));
+		lblValue.setFont(new Font("Calibri", Font.BOLD, 18));
+		lblValue.setBounds(25, 127, 57, 23);
+		panel.add(lblValue);
+		
+		JSpinner spinnerVal = new JSpinner();
+		spinnerVal.setToolTipText("");
+		spinnerVal.setBounds(82, 127, 41, 22);
+		panel.add(spinnerVal);
+		
+		JLabel lblHealing = new JLabel("Healing:");
+		lblHealing.setToolTipText("How much the item sells for");
+		lblHealing.setForeground(new Color(169, 169, 169));
+		lblHealing.setFont(new Font("Calibri", Font.BOLD, 18));
+		lblHealing.setBounds(25, 174, 71, 23);
+		panel.add(lblHealing);
+		
+		JSpinner spinnerHeal = new JSpinner();
+		spinnerHeal.setToolTipText("");
+		spinnerHeal.setBounds(102, 174, 41, 22);
+		panel.add(spinnerHeal);
+		
+		JLabel lblStamina = new JLabel("Energy:");
+		lblStamina.setToolTipText("How much the item sells for");
+		lblStamina.setForeground(new Color(169, 169, 169));
+		lblStamina.setFont(new Font("Calibri", Font.BOLD, 18));
+		lblStamina.setBounds(25, 217, 71, 23);
+		panel.add(lblStamina);
+		
+		JSpinner spinnerEnergy = new JSpinner();
+		spinnerEnergy.setToolTipText("");
+		spinnerEnergy.setBounds(102, 217, 41, 22);
+		panel.add(spinnerEnergy);
+		
+		
+		String[] itemTypes = {"Material", "Consumable", "Gear"};
+		JComboBox cbItemTypes = new JComboBox(itemTypes);
+		cbItemTypes.setBounds(437, 127, 108, 22);
+		panel.add(cbItemTypes);
+		
+		JLabel lblItemtype = new JLabel("ItemType:");
+		lblItemtype.setForeground(new Color(169, 169, 169));
+		lblItemtype.setFont(new Font("Calibri", Font.BOLD, 18));
+		lblItemtype.setBounds(338, 127, 87, 23);
+		panel.add(lblItemtype);
+		
+		JLabel lblSubitemtype = new JLabel("SubItemType:");
+		lblSubitemtype.setForeground(new Color(169, 169, 169));
+		lblSubitemtype.setFont(new Font("Calibri", Font.BOLD, 18));
+		lblSubitemtype.setBounds(338, 163, 118, 23);
+		panel.add(lblSubitemtype);
+		
+		String[] subItemTypes = {"None", "Potion", "Scroll", "Gem", "Structure", "Tile", "Seed", "Nuclear"};
+		JComboBox cbSubItemTypes = new JComboBox(subItemTypes);
+		cbSubItemTypes.setBounds(468, 163, 108, 22);
+		panel.add(cbSubItemTypes);
+		
+		JLabel lblIsunlocked = new JLabel("isUnlocked");
+		lblIsunlocked.setToolTipText("How much the item sells for");
+		lblIsunlocked.setForeground(new Color(169, 169, 169));
+		lblIsunlocked.setFont(new Font("Calibri", Font.BOLD, 18));
+		lblIsunlocked.setBounds(338, 205, 98, 23);
+		panel.add(lblIsunlocked);
+		
+		JCheckBox cbUnlocked = new JCheckBox("");
+		cbUnlocked.setBounds(437, 203, 24, 25);
+		panel.add(cbUnlocked);
+		
+		JLabel lblDmg = new JLabel("Damage:");
+		lblDmg.setToolTipText("How much the item sells for");
+		lblDmg.setForeground(new Color(169, 169, 169));
+		lblDmg.setFont(new Font("Calibri", Font.BOLD, 18));
+		lblDmg.setBounds(25, 263, 71, 23);
+		panel.add(lblDmg);
+		
+		JSpinner spinnerDmg = new JSpinner();
+		spinnerDmg.setToolTipText("");
+		spinnerDmg.setBounds(112, 263, 41, 22);
+		panel.add(spinnerDmg);
+		
+		
+		//panelSpriteCreate = new PanelSpriteCreate();
+		//contentPane.add(panelSpriteCreate.getPanelSpriteCreate());
 		
 	}
 }

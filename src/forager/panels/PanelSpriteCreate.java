@@ -25,6 +25,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 import forager.gui.GuiColors;
+import forager.objects.Item;
 
 public class PanelSpriteCreate extends JPanel implements ActionListener {
 	
@@ -234,6 +235,7 @@ public class PanelSpriteCreate extends JPanel implements ActionListener {
 
 		
 		return panelSpriteCreate;
+		//Item wood = new Item("Fist", );
 		
 	}
 
