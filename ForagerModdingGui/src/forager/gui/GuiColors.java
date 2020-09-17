@@ -30,7 +30,7 @@ public enum GuiColors {
     }
     
     /**
-     * Takes in a color from the GuiColors Enum and converts it to a color object
+     * Takes in a colv bnor from the GuiColors Enum and converts it to a color object
      * @param col - The color from the enum
      * @return color - A color object
      */

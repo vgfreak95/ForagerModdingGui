@@ -14,6 +14,7 @@ public class PanelBottom extends JPanel implements ActionListener {
 	private JPanel panelBottom;
 	private JButton btnContinue;
 	private JButton btnBack;
+	public static String lastBtn = "";
 	
 	public PanelBottom() { }
 	
@@ -27,9 +28,10 @@ public class PanelBottom extends JPanel implements ActionListener {
 		btnContinue = new JButton("CONTINUE");
 		btnContinue.setFocusPainted(false);
 		btnContinue.setFont(new Font("Calibri", Font.PLAIN, 22));
-		btnContinue.setBounds(530, 20, 140, 58);
+		btnContinue.setBounds(500, 15, 160, 60);
 		btnContinue.setBackground(GuiColors.getColor(GuiColors.PURE_ORANGE));
 		btnContinue.setForeground(GuiColors.getColor(GuiColors.LIGHT_WHITE));
+		btnContinue.addActionListener(this);
 		panelBottom.add(btnContinue);
 		
 		btnBack = new JButton("BACK");
@@ -47,8 +49,15 @@ public class PanelBottom extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		if (e.getSource() == btnContinue) {
+			lastBtn = "btnContinue";
+		}		
+		
+		else if (e.getSource() == btnBack) {
+			lastBtn = "btnBack";
+		}
+		
+		Gui.setCorrectPanel();
 		
 	}
-
-	
 }

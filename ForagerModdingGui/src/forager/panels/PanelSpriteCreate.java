@@ -65,7 +65,6 @@ public class PanelSpriteCreate extends JPanel implements ActionListener {
 	private Image scaledImage;
 	private ImageIcon imageIcon;
 	
-
 	
 	public PanelSpriteCreate() { }
 	
@@ -230,8 +229,6 @@ public class PanelSpriteCreate extends JPanel implements ActionListener {
 		lblImage.setBounds(416, 80, 192, 192);
 		//panelImageDisplayer.set
 		panelImageDisplayer.add(lblImage);
-		
-		thread.start();
 
 		
 		return panelSpriteCreate;
@@ -249,7 +246,7 @@ public class PanelSpriteCreate extends JPanel implements ActionListener {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
 
                 File file = fc.getSelectedFile();
-                System.out.println(file.getAbsolutePath());
+                //System.out.println(file.getAbsolutePath());
                 
                 File image;
                 BufferedImage fileImage;
@@ -262,7 +259,7 @@ public class PanelSpriteCreate extends JPanel implements ActionListener {
                     imageIcon = new ImageIcon(scaledImage);
                     lblImage.setBounds(416, 80, 192, 192);
                     lblImage.setIcon(imageIcon);
-                    System.out.println(image);
+                    //System.out.println(image);
 					
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -297,6 +294,10 @@ public class PanelSpriteCreate extends JPanel implements ActionListener {
 		
 		lblImage.setBounds(lblImageX - (lblImage.getWidth()/2), lblImageY - (lblImage.getHeight()/2), 192, 192);
 		
+	}
+	
+	public void setVisibility(boolean b) {
+		setVisible(b);
 	}
 	
 	
